@@ -15,6 +15,7 @@ global.github = '-' // gausah di isi juga gpp bro
 global.dana = '0812-5893-0466' // isi dengan nomor dana yg kamu punya 
 global.pulsa = '0812-5893-0466' // isi dengan nomor pulsa hp kalian
 global.gopay = '0812-5893-0466'
+global.donasi = 'https://telegra.ph/file/6bf79245d8481cab29258.jpg'
 
 //Name Bot & Grouplink//
 global.namebot = '𝕐𝕒𝕟𝕫𝔹𝕠𝕥𝕫 𝕏 𝕄𝕚𝕒ℂ𝕙𝕒𝕟'
