@@ -433,7 +433,6 @@ module.exports = {
                     sBye: '',
                     sPromote: '',
                     sDemote: '',
-                    delete: false,
                     antiLink: false,
                     viewonce: false,
                     antiToxic: false,
@@ -744,7 +743,7 @@ module.exports = {
         if (fromMe) return
         let chats = Object.entries(conn.chats).find(([user, data]) => data.messages && data.messages[id])
         if (!chats) return
-        let msg = JSON.parse(chats[1].messages[id])
+        let msg = JSON.parse(chats[0].messages[id])
         let chat = global.db.data.chats[msg.key.remoteJid] || {}
         if (chat.delete) return
         await this.reply(msg.key.remoteJid, `
