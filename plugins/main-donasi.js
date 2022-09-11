@@ -1,6 +1,5 @@
 let fs = require('fs')
 let handler = async (m, { conn }) => {
-let teks = 'donasi'
 let dana = global.dana
 let pulsa = global.pulsa
 let gopay = global.gopay
@@ -20,7 +19,7 @@ Contact person Owner:
 wa.me/${numberowner} (Owner)
 
 *donasi via follow ig juga boleh*`
-  conn.sendButtonImg(m.chat, fla + teks, anu, instagram, 'Thanks', 'thanks', m) 
+  conn.sendButtonImg(m.chat, donasi, anu, instagram, 'Thanks', 'thanks', m) 
 }
 handler.help = ['donasi']
 handler.tags = ['xp', 'info']
