@@ -433,6 +433,7 @@ module.exports = {
                     sBye: '',
                     sPromote: '',
                     sDemote: '',
+                    delete: false,
                     antiLink: false,
                     viewonce: false,
                     antiToxic: false,
@@ -736,6 +737,23 @@ module.exports = {
                         mentionedJid: this.parseMention(text)
                     }
                 })
+                break
+        }
+    },
+    async delete({ remoteJid, fromMe, id, participant }) {
+        if (fromMe) return
+        let chats = Object.entries(conn.chats).find(([user, data]) => data.messages && data.messages[id])
+        if (!chats) return
+        let msg = JSON.parse(chats[1].messages[id])
+        let chat = global.db.data.chats[msg.key.remoteJid] || {}
+        if (chat.delete) return
+        await this.reply(msg.key.remoteJid, `
+Terdeteksi @${participant.split`@`[0]} telah menghapus pesan
+Untuk mematikan fitur ini, ketik
+*.disable delete*
+`.trim(), msg, {
+            mentions: [participant]
+        })
         this.copyNForward(msg.key.remoteJid, msg).catch(e => console.log(e, msg))
     }
 }
@@ -750,7 +768,7 @@ global.dfail = (type, m, conn) => {
         private: 'Perintah ini hanya dapat digunakan di Chat Pribadi!',
         admin: 'Perintah ini hanya untuk *Admin* grup!',
         botAdmin: 'Jadikan bot sebagai *Admin* untuk menggunakan perintah ini!',
-        unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar tio.20*',
+        unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Ahyan.15*',
         restrict: 'Fitur ini di *disable*!'
     }[type]
     if (msg) return m.reply(msg)
